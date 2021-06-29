@@ -10,11 +10,11 @@ const CommentCreate = ({ postId }) => {
     }
 
     return (
-        <form onSubmit={saveComment}>
-            <div className="form-group">
+        <form onSubmit={saveComment} className="d-flex justify-content-around">
+            <div className="form-group d-flex">
                 <input value={content} placeholder="comment" onChange={(e) => setContent(e.target.value)} className="form-control" />
             </div>
-            <button className="btn btn-warning mt-2">Add Comment</button>
+            <button className="btn btn-warning btn-sm">Add</button>
         </form>
     )
 }

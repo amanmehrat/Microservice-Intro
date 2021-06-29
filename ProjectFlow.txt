@@ -1,0 +1,16 @@
+
+
+
+Project Flow
+
+1. Implement Post Service
+2. Implement Comment Service
+3. Implement EventBus Service
+
+
+4. Implement Moderation Service
+
+5. Implement Query Service
+
+
+

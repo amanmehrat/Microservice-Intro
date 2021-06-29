@@ -3,21 +3,31 @@ const app = express();
 const { randomBytes } = require("crypto");
 const cors = require('cors')
 app.use(express.json());
+const axios = require("axios");
 
 const posts = {};
 
 app.use(cors())
 
 app.get("/posts", (req, res) => {
-    res.send(posts);
+    return res.send(posts);
 })
 
-app.post("/posts", (req, res) => {
+app.post("/posts", async (req, res) => {
     const { title } = req.body;
     const id = randomBytes(4).toString("hex");
     posts[id] = { id, title };
-    res.sendStatus(201).send(posts[id]);
+
+
+    console.log("EventBus Emit - PostCreated");
+    await axios.post("http://localhost:4005/events", ({ type: "PostCreated", data: posts[id] }));
+    return res.status(201).send(posts[id]);
 })
+
+app.post("/events", (req, res) => {
+    console.log("Event Recieved - " + req.body.type);
+    return res.status(200);
+});
 
 
 app.listen(4000, () => {
