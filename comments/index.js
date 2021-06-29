@@ -22,7 +22,7 @@ app.post("/posts/:id/comments", async (req, res) => {
     comments[req.params.id] = newComment;
 
     console.log("EventBus Emit - CommentCreated");
-    await axios.post("http://localhost:4005/events", ({ type: "CommentCreated", data: { id, postId: req.params.id, content } }));
+    await axios.post("http://localhost:4005/events", ({ type: "CommentCreated", data: { id, postId: req.params.id, content, status: "Pending" } }));
     return res.status(201).json(newComment[id]);
 })
 
